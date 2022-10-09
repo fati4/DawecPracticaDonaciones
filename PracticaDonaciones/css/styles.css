@@ -1,0 +1,13 @@
+body{
+    
+}
+
+img{
+width: 90px;
+}
+div{
+    border: solid 3px black;
+    margin: 10px;
+    padding: 10PX;
+    float: left;
+}
