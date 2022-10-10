@@ -2,6 +2,8 @@ var arrayOrganizacioness=["Save the children","Caritas","Cruz Roja","GreenPeace"
 var arrayDonaciones=[10,2,3,5,2,3,5,6,3,4];
 var arrayDonacionesPorOrganizacion=[0,0,0,0,0,0,0,0,0,0];
 var arrayAportaciones=[0,0,0,0,0,0,0,0,0,0];
+var totalDonaciones=0;
+var mediaDonaciones=0;
 function donacionPorOrganizacion(organizacion){
    
  let indice = Number(arrayOrganizacioness.findIndex(posicion=> posicion == organizacion));
@@ -18,21 +20,12 @@ function NumAportacionesPorOrganizacion(organizacion){
 }
 
 function MediaTotalDonaciones(){
-
+ let arrayAportacionesHechas= Number(arrayAportaciones.find(posicion =>posicion!=0));
+mediaDonaciones=totalDonaciones/arrayAportacionesHechas.length;
 }
 
 function sumaTotalDeDonaciones(){
-  let totalDonaciones= arrayAportaciones.reduce(function(total,item,i){
-
-    total=arrayDonaciones[i]*arrayAportaciones[i]+item;
-    console.log(total);
-    return total;
-  })
   
-  console.log(totalDonaciones);
-}
-function sumaTotalDeDonaciones(){
-  let totalDonaciones=0;
   for(var i=0; i>=arrayAportaciones.length-1; i++){
     totalDonaciones=(arrayAportaciones[i]*arrayDonaciones[i]+totalDonaciones);
   }
