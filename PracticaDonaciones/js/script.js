@@ -22,9 +22,19 @@ function MediaTotalDonaciones(){
 }
 
 function sumaTotalDeDonaciones(){
-  let totalDonaciones= arrayDonacionesPorOrganizacion.reduce(function(total, item){
-    total=total+item;
+  let totalDonaciones= arrayAportaciones.reduce(function(total,item,i){
+
+    total=arrayDonaciones[i]*arrayAportaciones[i]+item;
+    console.log(total);
     return total;
   })
+  
+  console.log(totalDonaciones);
+}
+function sumaTotalDeDonaciones(){
+  let totalDonaciones=0;
+  for(var i=0; i>=arrayAportaciones.length-1; i++){
+    totalDonaciones=(arrayAportaciones[i]*arrayDonaciones[i]+totalDonaciones);
+  }
   console.log(totalDonaciones);
 }
