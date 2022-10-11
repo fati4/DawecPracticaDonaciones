@@ -20,8 +20,14 @@ function NumAportacionesPorOrganizacion(organizacion) {
 }
 
 function MediaTotalDonaciones() {
-  let arrayAportacionesHechas = Number(arrayAportaciones.find(posicion => posicion != 0));
-  mediaDonaciones = totalDonaciones / arrayAportacionesHechas.length;
+  let numeroAportaciones=0;
+  for(var i=0; i<=arrayAportaciones.length-1; i++){
+    if(arrayAportaciones[i]!=0){
+      numeroAportaciones= arrayAportaciones[i]+ numeroAportaciones;
+    }
+  }
+  mediaDonaciones = totalDonaciones / numeroAportaciones;
+  console.log(mediaDonaciones);
 }
 
 function sumaTotalDeDonaciones() {
