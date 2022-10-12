@@ -1,10 +1,9 @@
-var arrayOrganizacioness = ["Save the children", "Caritas", "Cruz Roja", "GreenPeace", "Medicos sin fronteras", "Caritas", "Caritas", "Caritas", "Caritas", "Caritas"];
+var arrayOrganizacioness = ["Save the children", "Caritas", "Cruz Roja", "GreenPeace", "Medicos sin fronteras", "Accion contra el hambre", "Amnistía Internacional", "Asociación Española contra el cáncer", "WWF", "Unicef"];
 var arrayDonaciones = [10, 2, 3, 5, 2, 3, 5, 6, 3, 4];
 var arrayDonacionesPorOrganizacion = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var arrayAportaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-var totalDonaciones = 0;
-var mediaDonaciones = 0;
-function donacionPorOrganizacion(organizacion) {
+
+/*function donacionPorOrganizacion(organizacion) {
 
   let indice = Number(arrayOrganizacioness.findIndex(posicion => posicion == organizacion));
 
@@ -12,38 +11,53 @@ function donacionPorOrganizacion(organizacion) {
   arrayDonacionesPorOrganizacion[indice] = arrayDonacionesPorOrganizacion[indice] + arrayDonaciones[indice];
 
   console.log(arrayDonacionesPorOrganizacion);
-}
+}*/
 function NumAportacionesPorOrganizacion(organizacion) {
   let indice = Number(arrayOrganizacioness.findIndex(posicion => posicion == organizacion));
   arrayAportaciones[indice] = arrayAportaciones[indice] + 1;
   console.log(arrayAportaciones);
+ 
+}
+function Aportacion(organizacion){
+  let indice = Number(arrayOrganizacioness.findIndex(posicion => posicion == organizacion));
+  return arrayAportaciones[indice];
 }
 
 function MediaTotalDonaciones() {
+  
   let numeroAportaciones=0;
   for(var i=0; i<=arrayAportaciones.length-1; i++){
     if(arrayAportaciones[i]!=0){
       numeroAportaciones= arrayAportaciones[i]+ numeroAportaciones;
     }
   }
-  mediaDonaciones = totalDonaciones / numeroAportaciones;
+ let mediaDonaciones = sumaTotalDeDonaciones() / numeroAportaciones;
   console.log(mediaDonaciones);
+  return mediaDonaciones;
 }
 
 function sumaTotalDeDonaciones() {
-
+  let totalDonaciones=0;
   for (var i = 0; i >= arrayAportaciones.length - 1; i++) {
     totalDonaciones = (arrayAportaciones[i] * arrayDonaciones[i] + totalDonaciones);
   }
   console.log(totalDonaciones);
+  return totalDonaciones;
 }
 function texto(){
   let caja= document.getElementById("CajaDeTexto");
-  let contenido="";
   for(var i=0; i<=arrayOrganizacioness.length-1; i++){
-    contenido= contenido + arrayOrganizacioness[i]+" ---- " +arrayAportaciones[i]  ;
-  }
- caja.textContent=  contenido ;
- 
+  let parrafo= document.createElement('p');
+  parrafo.textContent= arrayOrganizacioness[i]+" ---- " + Aportacion(arrayOrganizacioness[i]) 
+  caja.appendChild(parrafo);
+}
+let parrafoSuma = document.createElement('p');
+parrafoSuma.textContent = sumaTotalDeDonaciones() + "€ total "
+
+let parrafoMedia = document.createElement('p');
+parrafoMedia.textContent= MediaTotalDonaciones() + "media de donaciones"
+
+caja.appendChild(parrafoMedia);
+caja.appendChild(parrafoSuma);
   
 }
