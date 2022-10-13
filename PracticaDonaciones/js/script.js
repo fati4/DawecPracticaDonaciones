@@ -22,6 +22,19 @@ function Aportacion(organizacion){
   let indice = Number(arrayOrganizacioness.findIndex(posicion => posicion == organizacion));
   return arrayAportaciones[indice];
 }
+function OrdenarOrganizacion(){
+  let arrayOrganizacionesColocadas=[];
+  arrayOrganizacionesColocadas=arrayOrganizacioness.sort().reverse();
+  console.log(arrayOrganizacionesColocadas);
+  return arrayOrganizacionesColocadas;
+}
+function OrdenarAportaciones(organizacion){
+  let arrayAportacionesOrdenadas=[];
+  let indice = Number(OrdenarAportaciones().findIndex(posicion => posicion == organizacion));
+  let indice2= Number(arrayAportaciones.findIndex(posicion => posicion == Aportacion(organizacion)));
+  arrayAportacionesOrdenadas[indice]=arrayAportaciones[indice2];
+  return arrayAportacionesOrdenadas[indice];
+}
 
 function MediaTotalDonaciones() {
   
@@ -31,6 +44,7 @@ function MediaTotalDonaciones() {
       numeroAportaciones= arrayAportaciones[i]+ numeroAportaciones;
     }
   }
+  console.log(numeroAportaciones);
  let mediaDonaciones = sumaTotalDeDonaciones() / numeroAportaciones;
   console.log(mediaDonaciones);
   return mediaDonaciones;
@@ -38,8 +52,8 @@ function MediaTotalDonaciones() {
 
 function sumaTotalDeDonaciones() {
   let totalDonaciones=0;
-  for (var i = 0; i >= arrayAportaciones.length - 1; i++) {
-    totalDonaciones = (arrayAportaciones[i] * arrayDonaciones[i] + totalDonaciones);
+  for (var i = 0; i <= arrayAportaciones.length - 1; i++) {
+    totalDonaciones =( (arrayAportaciones[i] * arrayDonaciones[i]) + totalDonaciones);
   }
   console.log(totalDonaciones);
   return totalDonaciones;
@@ -48,16 +62,18 @@ function texto(){
   let caja= document.getElementById("CajaDeTexto");
   for(var i=0; i<=arrayOrganizacioness.length-1; i++){
   let parrafo= document.createElement('p');
-  parrafo.textContent= arrayOrganizacioness[i]+" ---- " + Aportacion(arrayOrganizacioness[i]) 
+  parrafo.textContent= OrdenarOrganizacion()[i]+" ---- " + OrdenarAportaciones(arrayOrganizacioness[i]) 
   caja.appendChild(parrafo);
 }
 let parrafoSuma = document.createElement('p');
 parrafoSuma.textContent = sumaTotalDeDonaciones() + "€ total "
 
 let parrafoMedia = document.createElement('p');
-parrafoMedia.textContent= MediaTotalDonaciones() + "media de donaciones"
+parrafoMedia.textContent= MediaTotalDonaciones() + "€ media de donaciones"
 
 caja.appendChild(parrafoMedia);
 caja.appendChild(parrafoSuma);
+OrdenarOrganizacion();
+
   
 }
