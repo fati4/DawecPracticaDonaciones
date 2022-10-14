@@ -11,18 +11,8 @@ var arrayOrganizacioness = [
   "Unicef",
 ];
 var arrayDonaciones = [10, 2, 3, 5, 2, 8, 5, 6, 3, 4];
-var arrayDonacionesPorOrganizacion = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var arrayAportaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-/*function donacionPorOrganizacion(organizacion) {
-
-  let indice = Number(arrayOrganizacioness.findIndex(posicion => posicion == organizacion));
-
-
-  arrayDonacionesPorOrganizacion[indice] = arrayDonacionesPorOrganizacion[indice] + arrayDonaciones[indice];
-
-  console.log(arrayDonacionesPorOrganizacion);
-}*/
 function NumAportacionesPorOrganizacion(organizacion) {
   let indice = Number(
     arrayOrganizacioness.findIndex((posicion) => posicion == organizacion)
@@ -30,13 +20,6 @@ function NumAportacionesPorOrganizacion(organizacion) {
   arrayAportaciones[indice] = arrayAportaciones[indice] + 1;
   BorrarContenidoDiv();
 }
-
-/*function Aportacion(organizacion) {
-  let indice = Number(
-    arrayOrganizacioness.findIndex((posicion) => posicion == organizacion)
-  );
-  return arrayAportaciones[indice];
-}*/
 
 function UnirOrganizacionYAportacion() {
   let arrayOrganizacionConAportacion = [];
