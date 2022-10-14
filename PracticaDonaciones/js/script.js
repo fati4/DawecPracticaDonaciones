@@ -28,6 +28,7 @@ function NumAportacionesPorOrganizacion(organizacion) {
     arrayOrganizacioness.findIndex((posicion) => posicion == organizacion)
   );
   arrayAportaciones[indice] = arrayAportaciones[indice] + 1;
+  BorrarContenidoDiv();
 }
 
 /*function Aportacion(organizacion) {
@@ -103,9 +104,8 @@ function CrearTexto() {
 
 function BorrarContenidoDiv(){
 let caja= document.getElementById("CajaDeTexto");
-for (var i = 0; i <= arrayOrganizacioness.length - 1; i++) {
-  let parrafo= document.getElementsByTagName("p");
-  caja.removeChild(parrafo[i]);
+while(caja.hasChildNodes){
+  caja.removeChild(caja.lastChild);
 }
 }
 
