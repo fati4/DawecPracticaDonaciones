@@ -28,10 +28,10 @@ function UnirOrganizacionYAportacion() {
     if (arrayAportaciones[i] != 0) {
       if(arrayAportaciones[i]>1){
             arrayOrganizacionConAportacion[i] =
-        arrayOrganizacioness[i] + "----" + arrayAportaciones[i] + " aportaciones"; 
+        arrayOrganizacioness[i] + " ---- " + arrayAportaciones[i] + " aportaciones"; 
       }else{
         arrayOrganizacionConAportacion[i] =
-        arrayOrganizacioness[i] + "----" + arrayAportaciones[i] + " aportacion"; 
+        arrayOrganizacioness[i] + " ---- " + arrayAportaciones[i] + " aportacion"; 
       }
  
     }
