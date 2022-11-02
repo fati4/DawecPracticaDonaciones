@@ -24,7 +24,6 @@ function crearObjetosOrganizacion(){
   let AsociacionEspanolaContraElCancer= new OPersonas("Asociacion Española contra el cáncer",arrayAportaciones[7],false,"tercera edad");
   let WWF= new OAnimales("WWF",arrayAportaciones[8],true,"internacional");
   let Unicef= new OAnimales("Unicef",arrayAportaciones[9],false,"local");
-  
 }
 /*Esta función rellena el array de aportaciones segun las veces que se le de click a una organizacion.
 Al final de la función borra el contenido de texto si hubiera algo dentro de la caja de texto*/
