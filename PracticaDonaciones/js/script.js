@@ -10,7 +10,8 @@ var arrayOrganizacioness = [
   "WWF",
   "Unicef",
 ];
-var arrayDonaciones = [10, 2, 3, 5, 2, 8, 5, 6, 3, 4];
+//var arrayDonaciones = [10, 2, 3, 5, 2, 8, 5, 6, 3, 4];
+var arrayTotalDonacion=[0,0,0,0,0,0,0,0,0,0];
 var arrayAportaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 function crearObjetosOrganizacion(){
@@ -25,6 +26,16 @@ function crearObjetosOrganizacion(){
   let WWF= new OAnimales("WWF",arrayAportaciones[8],true,"internacional");
   let Unicef= new OAnimales("Unicef",arrayAportaciones[9],false,"local");
 }
+
+function totalDonacionOrganizacion(organizacion){
+  let indice = Number(
+    arrayOrganizacioness.findIndex((posicion) => posicion == organizacion)
+  );
+  let aportacion=document.getElementsByName('donacion')[indice].value;
+  console.log(aportacion);
+  arrayTotalDonacion[indice]= Number(arrayTotalDonacion[indice]) + Number(aportacion);
+  console.log(arrayTotalDonacion);
+}
 /*Esta función rellena el array de aportaciones segun las veces que se le de click a una organizacion.
 Al final de la función borra el contenido de texto si hubiera algo dentro de la caja de texto*/
 function NumAportacionesPorOrganizacion(organizacion) {
@@ -32,11 +43,16 @@ function NumAportacionesPorOrganizacion(organizacion) {
     arrayOrganizacioness.findIndex((posicion) => posicion == organizacion)
   );
   arrayAportaciones[indice] = arrayAportaciones[indice] + 1;
-  BorrarContenidoDiv();
+  totalDonacionOrganizacion(organizacion);
+  console.log(arrayAportaciones);
+ // BorrarContenidoDiv();
 }
+
+
 
 /*Crea un array que une las organizaciones con las aportaciones realizadas por cada organización 
 y luego los ordena al contrario del orden alfabetico. Si el numero de aportación es 0 no lo mete en el nuevo array*/ 
+/*
 function UnirOrganizacionYAportacion() {
   let arrayOrganizacionConAportacion = [];
   arrayOrganizacionConAportacion.length = 10;
@@ -55,9 +71,11 @@ function UnirOrganizacionYAportacion() {
   arrayOrganizacionConAportacion.sort().reverse();
   return arrayOrganizacionConAportacion;
 }
+*/
 
 /*Hace la suma total de aportaciones que se han hecho sumando las posiciones del array de 
 aportaciones para tener el numero total de aportaciones y asi poder hacer la media*/
+/*
 function MediaTotalDonaciones() {
   let numeroAportaciones = 0;
   for (var i = 0; i <= arrayAportaciones.length - 1; i++) {
@@ -78,9 +96,10 @@ function SumaTotalDeDonaciones() {
   }
   return totalDonaciones;
 }
-
+*/
 
 /*Inicializa el array de aportaciones a 0 para poder volver a empezar de nuevo las donaciones */
+/*
 function InicializarTodo(){
   for(var i=0; i<=arrayAportaciones.length-1;i++){
     arrayAportaciones[i]=0;
@@ -115,5 +134,5 @@ while(caja.hasChildNodes){
 }
 
   
-
+*/
 

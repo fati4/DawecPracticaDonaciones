@@ -23,7 +23,7 @@ class OAnimales extends Organizacion{
     if (this.ambitoTrabajo=="local"  || this.ambitoTrabajo=="provincial" || this.ambitoTrabajo=="nacional" || this.ambitoTrabajo=="internacional"){
        return this.ambitoTrabajo  
     }else{
-        console.log("error")
+        console.log("error");
     }
    
  }
@@ -36,5 +36,11 @@ class OPersonas extends Organizacion{
         this.rangoEdad=rangoEdad;
     }
 
-    
+    getrangoEdad(){
+        if(this.rangoEdad=="infantil" || this.rangoEdad=="adolescencia" ||this.rangoEdad=="tercera edad" ){
+            return this.rangoEdad;
+        }else{
+            console.log("error");
+        }
+    }
 }
