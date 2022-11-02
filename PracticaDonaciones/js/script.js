@@ -13,7 +13,19 @@ var arrayOrganizacioness = [
 var arrayDonaciones = [10, 2, 3, 5, 2, 8, 5, 6, 3, 4];
 var arrayAportaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-
+function crearObjetosOrganizacion(){
+  let SaveTheChildren= new OPersonas("Save the children",arrayAportaciones[0],true,"infantil");
+  let Caritas= new OPersonas("Caritas",arrayAportaciones[1],false,"adolescencia");
+  let CruzRoja= new OPersonas("Cruz Roja",arrayAportaciones[2],false,"infantil");
+  let GreenPeace= new OAnimales("GreenPeace",arrayAportaciones[3],true,"nacional");
+  let MedicosSinFrontera= new OPersonas("Medicos sin fronteras",arrayAportaciones[4],false," tercera edad");
+  let AccionContraElHambre= new OAnimales("Accion contra el hambre",arrayAportaciones[5],true,"provincial");
+  let AmnistiaInternacional= new OPersonas("Amnistía Internacional",arrayAportaciones[6],true,"adolescencia");
+  let AsociacionEspanolaContraElCancer= new OPersonas("Asociacion Española contra el cáncer",arrayAportaciones[7],false,"tercera edad");
+  let WWF= new OAnimales("WWF",arrayAportaciones[8],true,"internacional");
+  let Unicef= new OAnimales("Unicef",arrayAportaciones[9],false,"local");
+  
+}
 /*Esta función rellena el array de aportaciones segun las veces que se le de click a una organizacion.
 Al final de la función borra el contenido de texto si hubiera algo dentro de la caja de texto*/
 function NumAportacionesPorOrganizacion(organizacion) {
