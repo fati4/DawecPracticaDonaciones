@@ -5,28 +5,28 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-    margin-left: 20px;
-
-}
 
 h1 {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    display: block;
+    float: left;
+    margin-top: 10px;
+    width: 70%;
+   
+    
 
 
 }
 
 img {
-    width: 90px;
+    width: 70px;
 }
 
 .organizacion {
     font-size: 15px;
     background-color: white;
     border-radius: 9px;
-    height: 8.5em;
-    width: 17em;
+    height: 6.5em;
+    width: 8.5em;
 
 }
 
@@ -47,11 +47,14 @@ div {
 }
 
 #CajaDeTexto {
+    display: block;
+    float: left;
     border: 1px solid gray;
     border-radius: 9px;
-    clear: both;
-    width: 95%;
-    margin-top: 20px;
+   
+    width: 65%;
+    margin-top: 20px; 
+    margin-left: 20px;
     overflow-y: scroll;
     height: 8.5em;
 
@@ -59,7 +62,8 @@ div {
 
 button {
     display: block;
-    clear: both;
+    float: left;
+    margin-left:  32%;
     margin-top: 20px;
     border-radius: 8px;
     background-color: gray;
@@ -70,4 +74,22 @@ button {
 
 button:active {
     background-color: greenyellow;
+}
+#contenedorLateral{
+    display: block;
+    float: right;
+    height: 100vh;
+    width: 25%;
+    background-color: pink;
+    margin: 0px;
+    padding: 0px;
+}
+#contenedorOrganizaciones{
+    display: block;
+    float: left;
+     margin: 0px;
+    margin-left: 20px;
+    width: 72%;
+   
+    padding: 0px;
 }
