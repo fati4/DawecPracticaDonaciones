@@ -42,12 +42,27 @@ function NumAportacionesPorOrganizacion(organizacion) {
   let indice = Number(
     arrayOrganizacioness.findIndex((posicion) => posicion == organizacion)
   );
+  let aportacion=document.getElementsByName('donacion')[indice].value;
+  if(aportacion>0){
+    let indice = Number(
+    arrayOrganizacioness.findIndex((posicion) => posicion == organizacion)
+  );
   arrayAportaciones[indice] = arrayAportaciones[indice] + 1;
   totalDonacionOrganizacion(organizacion);
+  rellenarContenedorLateral(organizacion, aportacion);
   console.log(arrayAportaciones);
+  }
+  
  // BorrarContenidoDiv();
 }
 
+function rellenarContenedorLateral(organizacion, aportacion){
+  let cajaLateral = document.getElementById("contenedorLateral");
+  let parrafoDonacion = document.createElement("p");
+  parrafoDonacion.textContent = organizacion + " --- " + aportacion ;
+  cajaLateral.appendChild(parrafoDonacion);
+
+}
 
 
 /*Crea un array que une las organizaciones con las aportaciones realizadas por cada organización 

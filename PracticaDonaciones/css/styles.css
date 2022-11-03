@@ -79,10 +79,11 @@ button:active {
     display: block;
     float: right;
     height: 100vh;
-    width: 25%;
+    width: 22%;
     background-color: pink;
-    margin: 0px;
-    padding: 0px;
+    margin: 0px auto;
+    padding: 2em;
+    text-align: center;
 }
 #contenedorOrganizaciones{
     display: block;
