@@ -63,6 +63,9 @@ function rellenarContenedorLateral(organizacion, aportacion){
   cajaLateral.appendChild(parrafoDonacion);
 
 }
+function marcarOrganizacion(){
+  
+}
 
 
 /*Crea un array que une las organizaciones con las aportaciones realizadas por cada organización 
