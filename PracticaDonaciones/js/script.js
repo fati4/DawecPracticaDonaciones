@@ -1,5 +1,5 @@
 
-var arrayOrganizacioness = [
+/*var arrayOrganizacioness = [
   "Save the children",
   "Caritas",
   "Cruz Roja",
@@ -10,58 +10,63 @@ var arrayOrganizacioness = [
   "Asociación Española contra el cáncer",
   "WWF",
   "Unicef"
-];
+];*/
 
 //var arrayDonaciones = [10, 2, 3, 5, 2, 8, 5, 6, 3, 4];
 var arrayTotalDonacion = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var arrayAportaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-  var SaveTheChildren = new OPersonas("Save the children", arrayAportaciones[0], true, "infantil");
-  var Caritas = new OPersonas("Caritas", arrayAportaciones[1], false, "adolescencia");
-  var CruzRoja = new OPersonas("Cruz Roja", arrayAportaciones[2], false, "infantil");
-  var GreenPeace = new OAnimales("GreenPeace", arrayAportaciones[3], true, "nacional");
-  var MedicosSinFrontera = new OPersonas("Medicos sin fronteras", arrayAportaciones[4], false, " tercera edad");
-  var AccionContraElHambre = new OAnimales("Accion contra el hambre", arrayAportaciones[5], true, "provincial");
-  var AmnistiaInternacional = new OPersonas("Amnistía Internacional", arrayAportaciones[6], true, "adolescencia");
-  var AsociacionEspanolaContraElCancer = new OPersonas("Asociacion Española contra el cáncer", arrayAportaciones[7], false, "tercera edad");
-  var WWF = new OAnimales("WWF", arrayAportaciones[8], true, "internacional");
-  var Unicef = new OAnimales("Unicef", arrayAportaciones[9], false, "local");
+var SaveTheChildren = new OPersonas("Save the children", arrayAportaciones[0], 0, 0, true, "infantil");
+var Caritas = new OPersonas("Caritas", arrayAportaciones[1], 0, 0, false, "adolescencia");
+var CruzRoja = new OPersonas("Cruz Roja", arrayAportaciones[2], 0, 0, false, "infantil");
+var GreenPeace = new OAnimales("GreenPeace", arrayAportaciones[3], 0, 0, true, "nacional");
+var MedicosSinFrontera = new OPersonas("Medicos sin fronteras", arrayAportaciones[4], 0, 0, false, " tercera edad");
+var AccionContraElHambre = new OAnimales("Accion contra el hambre", arrayAportaciones[5], 0, 0, true, "provincial");
+var AmnistiaInternacional = new OPersonas("Amnistía Internacional", arrayAportaciones[6], 0, 0, true, "adolescencia");
+var AsociacionEspanolaContraElCancer = new OPersonas("Asociacion Española contra el cáncer", arrayAportaciones[7], 0, 0, false, "tercera edad");
+var WWF = new OAnimales("WWF", arrayAportaciones[8], 0, 0, true, "internacional");
+var Unicef = new OAnimales("Unicef", arrayAportaciones[9], 0, 0, false, "local");
 
-var arrayOrganizaciones=[ SaveTheChildren,
-Caritas,
-CruzRoja,
-GreenPeace,
-MedicosSinFrontera,
-AccionContraElHambre,
-AmnistiaInternacional,
-AsociacionEspanolaContraElCancer,
-WWF,
-Unicef];
+var arrayOrganizaciones = [SaveTheChildren,
+  Caritas,
+  CruzRoja,
+  GreenPeace,
+  MedicosSinFrontera,
+  AccionContraElHambre,
+  AmnistiaInternacional,
+  AsociacionEspanolaContraElCancer,
+  WWF,
+  Unicef];
 
 function totalDonacionOrganizacion(organizacion) {
   let indice = Number(
-    arrayOrganizacioness.findIndex((posicion) => posicion == organizacion)
+    arrayOrganizaciones.findIndex((posicion) => posicion.getNombre() == organizacion)
   );
   let aportacion = document.getElementsByName('donacion')[indice].value;
   console.log(aportacion);
-  arrayTotalDonacion[indice] = Number(arrayTotalDonacion[indice]) + Number(aportacion);
+  let total;
+  total = Number(arrayOrganizaciones[indice].getTotal()) + Number(aportacion);
+   arrayOrganizaciones[indice].setTotal(total);
+   console.log(arrayOrganizaciones[indice].getTotal());
   console.log(arrayTotalDonacion);
+  return total;
 }
 /*Esta función rellena el array de aportaciones segun las veces que se le de click a una organizacion.
 Al final de la función borra el contenido de texto si hubiera algo dentro de la caja de texto*/
 function NumAportacionesPorOrganizacion(organizacion) {
   let indice = Number(
-    arrayOrganizacioness.findIndex((posicion) => posicion == organizacion)
+    arrayOrganizaciones.findIndex((posicion) => posicion.getNombre() == organizacion)
   );
   let aportacion = document.getElementsByName('donacion')[indice].value;
   if (aportacion > 0) {
     let indice = Number(
-      arrayOrganizacioness.findIndex((posicion) => posicion == organizacion)
+      arrayOrganizaciones.findIndex((posicion) => posicion.getNombre() == organizacion)
     );
     arrayAportaciones[indice] = arrayAportaciones[indice] + 1;
     totalDonacionOrganizacion(organizacion);
     rellenarContenedorLateral(organizacion, aportacion);
     marcarOrganizacion();
+    calcularMedia(organizacion);
     console.log(arrayAportaciones);
   }
 
@@ -90,9 +95,21 @@ function marcarOrganizacion() {
   }
 }
 
-function fechaFinalizacion(){
-  let fechaActual= new Date().toLocaleString();
-  console.log(fechaActual)
+function fechaFinalizacion() {
+  let fechaActual = new Date().toLocaleString();
+  return fechaActual;
+}
+
+function calcularMedia(organizacion) {
+  let indice = Number(
+    arrayOrganizaciones.findIndex((posicion) => posicion.getNombre() == organizacion)
+  );
+let media= arrayOrganizaciones[indice].getTotal()/arrayAportaciones[indice];
+media.toFixed(3);
+arrayOrganizaciones[indice].setMedia(media);
+console.log(arrayOrganizaciones[indice].getMedia());
+return media;
+
 }
 
 /*Crea un array que une las organizaciones con las aportaciones realizadas por cada organización 
