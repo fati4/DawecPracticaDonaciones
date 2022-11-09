@@ -67,6 +67,7 @@ function NumAportacionesPorOrganizacion(organizacion) {
     rellenarContenedorLateral(organizacion, aportacion);
     marcarOrganizacion();
     calcularMedia(organizacion);
+    InvertirOrderOrganizaciones();
     console.log(arrayAportaciones);
   }
 
@@ -110,6 +111,25 @@ arrayOrganizaciones[indice].setMedia(media);
 console.log(arrayOrganizaciones[indice].getMedia());
 return media;
 
+}
+
+function InvertirOrderOrganizaciones(){
+ let arrayOrganizacionesOrdenadas;
+ let contador=0;
+
+ for(var i=0; i<arrayOrganizaciones.length; i++){
+  let total=arrayOrganizaciones[i].getTotal();
+  if(total!=0){
+    console.log(arrayOrganizaciones[i]);
+    arrayOrganizacionesOrdenadas[contador]=arrayOrganizaciones[i];
+    contador++;
+  }
+ }
+ arrayOrganizaciones.sort().reverse();
+
+console.log(arrayOrganizaciones);
+
+  
 }
 
 /*Crea un array que une las organizaciones con las aportaciones realizadas por cada organización 
@@ -167,7 +187,7 @@ function InicializarTodo(){
     arrayAportaciones[i]=0;
   }
 }
-
+*/
 
 function CrearTexto() {
   let caja = document.getElementById("CajaDeTexto");
@@ -196,5 +216,5 @@ while(caja.hasChildNodes){
 }
 
   
-*/
+
 
