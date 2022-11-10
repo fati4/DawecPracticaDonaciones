@@ -274,17 +274,20 @@ function CrearTexto() {
 
   for (var i = 0; i < arrayOrganizaciones.length; i++) {
 
-    let total= arrayOrganizaciones[i].getTotal();
-    
-   
-        let parrafo = document.createElement("p");
+    let total= InvertirOrderOrganizaciones()[i].getTotal();
+    console.log(total);
+    if(total!=0){
+      let parrafo = document.createElement("p");
     parrafo.textContent =
       InvertirOrderOrganizaciones()[i].getNombre() +
       " --- " +
       InvertirOrderOrganizaciones()[i].getMedia() +
-      " --- " +
-      InvertirOrderOrganizaciones()[i].getTotal() ;
+      "€ --- " +
+      InvertirOrderOrganizaciones()[i].getTotal() +"€" ;
     caja.appendChild(parrafo);
+    }
+   
+        
     
 
   }
