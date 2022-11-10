@@ -119,9 +119,11 @@ function totalDonacionOrganizacion(organizacion) {
   console.log(aportacion);
   let total;
   total = Number(arrayOrganizaciones[indice].getTotal()) + Number(aportacion);
+  total=total.toFixed(3);
   arrayOrganizaciones[indice].setTotal(total);
   console.log(arrayOrganizaciones[indice].getTotal());
   console.log(arrayTotalDonacion);
+  
   return total;
 }
 /*Esta función rellena el array de aportaciones segun las veces que se le de click a una organizacion.
@@ -185,9 +187,10 @@ function calcularMedia(organizacion) {
   );
   let media =
     arrayOrganizaciones[indice].getTotal() / arrayAportaciones[indice];
-  media.toFixed(3);
+  media=media.toFixed(3);
   arrayOrganizaciones[indice].setMedia(media);
   console.log(arrayOrganizaciones[indice].getMedia());
+ 
   return media;
 }
 
@@ -270,14 +273,20 @@ function CrearTexto() {
   caja.appendChild(fecha);
 
   for (var i = 0; i < arrayOrganizaciones.length; i++) {
-    let parrafo = document.createElement("p");
+
+    let total= arrayOrganizaciones[i].getTotal();
+    
+   
+        let parrafo = document.createElement("p");
     parrafo.textContent =
       InvertirOrderOrganizaciones()[i].getNombre() +
       " --- " +
       InvertirOrderOrganizaciones()[i].getMedia() +
       " --- " +
-      InvertirOrderOrganizaciones()[i].getTotal();
+      InvertirOrderOrganizaciones()[i].getTotal() ;
     caja.appendChild(parrafo);
+    
+
   }
   /*let parrafoSuma = document.createElement("p");
   let parrafoMedia = document.createElement("p");
