@@ -119,12 +119,12 @@ function totalDonacionOrganizacion(organizacion) {
   console.log(aportacion);
   let total;
   total = Number(arrayOrganizaciones[indice].getTotal()) + Number(aportacion);
-  total=total.toFixed(3);
+  
   arrayOrganizaciones[indice].setTotal(total);
   console.log(arrayOrganizaciones[indice].getTotal());
   console.log(arrayTotalDonacion);
   
-  return total;
+  return total.toFixed(3);
 }
 /*Esta función rellena el array de aportaciones segun las veces que se le de click a una organizacion.
 Al final de la función borra el contenido de texto si hubiera algo dentro de la caja de texto*/
@@ -187,11 +187,11 @@ function calcularMedia(organizacion) {
   );
   let media =
     arrayOrganizaciones[indice].getTotal() / arrayAportaciones[indice];
-  media=media.toFixed(3);
+ 
   arrayOrganizaciones[indice].setMedia(media);
   console.log(arrayOrganizaciones[indice].getMedia());
  
-  return media;
+  return media.toFixed(3);
 }
 
 function InvertirOrderOrganizaciones() {
@@ -265,7 +265,30 @@ function InicializarTodo(){
   }
 }
 */
+function CantidadTotalDonaciones(){
+let total=0;
+for(var i=0; i<arrayOrganizaciones.length; i++){
+  let totalO=Number(arrayOrganizaciones[i].getTotal());
+  total=totalO+total;
+}
+console.log(total);
 
+return total.toFixed(3);
+}
+function CantidadMediaDonaciones(){
+  let total= CantidadTotalDonaciones();
+  let numeroOrganizaciones=0;
+  for(var i=0; i<arrayOrganizaciones.length; i++){
+    if(arrayOrganizaciones[i].getTotal()!=0){
+      numeroOrganizaciones=numeroOrganizaciones+1;
+    }
+  }
+  let media= total/numeroOrganizaciones;
+  console.log(numeroOrganizaciones);
+  console.log(media);
+
+  return media.toFixed(3);
+}
 function CrearTexto() {
   let caja = document.getElementById("CajaDeTexto");
   let fecha = document.createElement("p");
@@ -281,9 +304,9 @@ function CrearTexto() {
     parrafo.textContent =
       InvertirOrderOrganizaciones()[i].getNombre() +
       " --- " +
-      InvertirOrderOrganizaciones()[i].getMedia() +
+      InvertirOrderOrganizaciones()[i].getMedia().toFixed(3) +
       "€ --- " +
-      InvertirOrderOrganizaciones()[i].getTotal() +"€" ;
+      InvertirOrderOrganizaciones()[i].getTotal().toFixed(3) +"€" ;
     caja.appendChild(parrafo);
     }
    
@@ -291,15 +314,15 @@ function CrearTexto() {
     
 
   }
-  /*let parrafoSuma = document.createElement("p");
+  let parrafoTotal = document.createElement("p");
   let parrafoMedia = document.createElement("p");
 
-  parrafoSuma.textContent = "Donación final: " + SumaTotalDeDonaciones() + "€";
-  parrafoMedia.textContent = "Donación media: " + MediaTotalDonaciones() + "€/aportación";
+  parrafoTotal.textContent = "Donación final: " + CantidadTotalDonaciones() + "€";
+  parrafoMedia.textContent = "Donación media: " + CantidadMediaDonaciones() + "€/aportación";
 
-  caja.appendChild(parrafoSuma);
+  caja.appendChild(parrafoTotal);
   caja.appendChild(parrafoMedia);
-  InicializarTodo();*/
+  InicializarTodo();
 }
 
 /*
