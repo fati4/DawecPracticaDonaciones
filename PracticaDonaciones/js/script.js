@@ -20,6 +20,7 @@ var SaveTheChildren = new OPersonas(
   arrayAportaciones[0],
   0,
   0,
+  "Personas",
   true,
   "infantil"
 );
@@ -28,6 +29,7 @@ var Caritas = new OPersonas(
   arrayAportaciones[1],
   0,
   0,
+  "Personas",
   false,
   "adolescencia"
 );
@@ -36,6 +38,7 @@ var CruzRoja = new OPersonas(
   arrayAportaciones[2],
   0,
   0,
+  "Personas",
   false,
   "infantil"
 );
@@ -44,6 +47,7 @@ var GreenPeace = new OAnimales(
   arrayAportaciones[3],
   0,
   0,
+  "Animales",
   true,
   "nacional"
 );
@@ -52,14 +56,16 @@ var MedicosSinFrontera = new OPersonas(
   arrayAportaciones[4],
   0,
   0,
+  "Personas",
   false,
-  " tercera edad"
+  "tercera edad"
 );
 var AccionContraElHambre = new OAnimales(
   "Accion contra el hambre",
   arrayAportaciones[5],
   0,
   0,
+  "Animales",
   true,
   "provincial"
 );
@@ -68,6 +74,7 @@ var AmnistiaInternacional = new OPersonas(
   arrayAportaciones[6],
   0,
   0,
+  "Personas",
   true,
   "adolescencia"
 );
@@ -76,6 +83,7 @@ var AsociacionEspanolaContraElCancer = new OPersonas(
   arrayAportaciones[7],
   0,
   0,
+  "Personas",
   false,
   "tercera edad"
 );
@@ -84,6 +92,7 @@ var WWF = new OAnimales(
   arrayAportaciones[8],
   0,
   0,
+  "Animales",
   true,
   "internacional"
 );
@@ -92,6 +101,7 @@ var Unicef = new OAnimales(
   arrayAportaciones[9],
   0,
   0,
+  "Animales",
   false,
   "local"
 );
@@ -119,11 +129,11 @@ function totalDonacionOrganizacion(organizacion) {
   console.log(aportacion);
   let total;
   total = Number(arrayOrganizaciones[indice].getTotal()) + Number(aportacion);
-  
+
   arrayOrganizaciones[indice].setTotal(total);
   console.log(arrayOrganizaciones[indice].getTotal());
   console.log(arrayTotalDonacion);
-  
+
   return total;
 }
 /*Esta función rellena el array de aportaciones segun las veces que se le de click a una organizacion.
@@ -187,10 +197,10 @@ function calcularMedia(organizacion) {
   );
   let media =
     arrayOrganizaciones[indice].getTotal() / arrayAportaciones[indice];
- 
+
   arrayOrganizaciones[indice].setMedia(media);
   console.log(arrayOrganizaciones[indice].getMedia());
- 
+
   return media;
 }
 
@@ -265,25 +275,26 @@ function InicializarTodo(){
   }
 }
 */
-function CantidadTotalDonaciones(){
-let total=0;
-for(var i=0; i<arrayOrganizaciones.length; i++){
-  let totalO=Number(arrayOrganizaciones[i].getTotal());
-  total=totalO+total;
-}
-console.log(total);
+function CantidadTotalDonaciones() {
+  let total = 0;
+  for (var i = 0; i < arrayOrganizaciones.length; i++) {
+    let totalO = Number(arrayOrganizaciones[i].getTotal());
+    total = totalO + total;
+  }
+  console.log(total);
 
-return total;
+  return total;
 }
-function CantidadMediaDonaciones(){
-  let total= CantidadTotalDonaciones();
-  let numeroOrganizaciones=0;
-  for(var i=0; i<arrayOrganizaciones.length; i++){
-    if(arrayOrganizaciones[i].getTotal()!=0){
-      numeroOrganizaciones=numeroOrganizaciones+1;
+function CantidadMediaDonaciones() {
+  let total = CantidadTotalDonaciones();
+  let numeroOrganizaciones = 0;
+  for (var i = 0; i < arrayOrganizaciones.length; i++) {
+    if (arrayOrganizaciones[i].getTotal() != 0) {
+      numeroOrganizaciones = numeroOrganizaciones + 1;
+      console.log(numeroOrganizaciones);
     }
   }
-  let media= total/numeroOrganizaciones;
+  let media = total / numeroOrganizaciones;
   console.log(numeroOrganizaciones);
   console.log(media);
 
@@ -297,21 +308,21 @@ function CrearTexto() {
 
   for (var i = 0; i < arrayOrganizaciones.length; i++) {
 
-    let total= InvertirOrderOrganizaciones()[i].getTotal();
+    let total = InvertirOrderOrganizaciones()[i].getTotal();
     console.log(total);
-    if(total!=0){
+    if (total != 0) {
       let parrafo = document.createElement("p");
-    parrafo.textContent =
-      InvertirOrderOrganizaciones()[i].getNombre() +
-      " --- " +
-      InvertirOrderOrganizaciones()[i].getMedia().toLocaleString() +
-      "€ --- " +
-      InvertirOrderOrganizaciones()[i].getTotal().toLocaleString() +"€" ;
-    caja.appendChild(parrafo);
+      parrafo.textContent =
+        InvertirOrderOrganizaciones()[i].getNombre() +
+        " --- " +
+        InvertirOrderOrganizaciones()[i].getMedia().toLocaleString() +
+        "€ --- " +
+        InvertirOrderOrganizaciones()[i].getTotal().toLocaleString() + "€";
+      caja.appendChild(parrafo);
     }
-   
-        
-    
+
+
+
 
   }
   let parrafoTotal = document.createElement("p");
@@ -322,8 +333,26 @@ function CrearTexto() {
 
   caja.appendChild(parrafoTotal);
   caja.appendChild(parrafoMedia);
+  ventanaEmergente();
   InicializarTodo();
 }
+
+function ventanaEmergente() {
+  let ventana = window.open("", "ventana", "width=500,height=300")
+  let contenido;
+  for (var i = 0; i < arrayOrganizaciones.length; i++) {
+    if (arrayOrganizaciones[i].getTotal() != 0) {
+      if (arrayOrganizaciones[i].getTipo() == "Animales") {
+        contenido = (contenido + "<p>" + arrayOrganizaciones[i].getNombre() +" "+ arrayOrganizaciones[i].getMultiRaza() + " " + arrayOrganizaciones[i].getambitoTrabajo() + "</p>");
+      } if ((arrayOrganizaciones[i].getTipo() == "Personas")) {
+        contenido = (contenido + "<p>" + arrayOrganizaciones[i].getNombre() +" "+ arrayOrganizaciones[i].getColaborar() + " " + arrayOrganizaciones[i].getrangoEdad() + "</p>");
+
+      }
+    }
+    console.log(contenido);
+  } ventana.document.write(contenido)
+}
+
 
 /*
 function BorrarContenidoDiv() {
