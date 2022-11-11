@@ -124,7 +124,7 @@ function totalDonacionOrganizacion(organizacion) {
   console.log(arrayOrganizaciones[indice].getTotal());
   console.log(arrayTotalDonacion);
   
-  return total.toFixed(3);
+  return total;
 }
 /*Esta función rellena el array de aportaciones segun las veces que se le de click a una organizacion.
 Al final de la función borra el contenido de texto si hubiera algo dentro de la caja de texto*/
@@ -191,7 +191,7 @@ function calcularMedia(organizacion) {
   arrayOrganizaciones[indice].setMedia(media);
   console.log(arrayOrganizaciones[indice].getMedia());
  
-  return media.toFixed(3);
+  return media;
 }
 
 function InvertirOrderOrganizaciones() {
@@ -273,7 +273,7 @@ for(var i=0; i<arrayOrganizaciones.length; i++){
 }
 console.log(total);
 
-return total.toFixed(3);
+return total;
 }
 function CantidadMediaDonaciones(){
   let total= CantidadTotalDonaciones();
@@ -287,7 +287,7 @@ function CantidadMediaDonaciones(){
   console.log(numeroOrganizaciones);
   console.log(media);
 
-  return media.toFixed(3);
+  return Number(media);
 }
 function CrearTexto() {
   let caja = document.getElementById("CajaDeTexto");
@@ -304,9 +304,9 @@ function CrearTexto() {
     parrafo.textContent =
       InvertirOrderOrganizaciones()[i].getNombre() +
       " --- " +
-      InvertirOrderOrganizaciones()[i].getMedia().toFixed(3) +
+      InvertirOrderOrganizaciones()[i].getMedia().toLocaleString() +
       "€ --- " +
-      InvertirOrderOrganizaciones()[i].getTotal().toFixed(3) +"€" ;
+      InvertirOrderOrganizaciones()[i].getTotal().toLocaleString() +"€" ;
     caja.appendChild(parrafo);
     }
    
@@ -317,8 +317,8 @@ function CrearTexto() {
   let parrafoTotal = document.createElement("p");
   let parrafoMedia = document.createElement("p");
 
-  parrafoTotal.textContent = "Donación final: " + CantidadTotalDonaciones() + "€";
-  parrafoMedia.textContent = "Donación media: " + CantidadMediaDonaciones() + "€/aportación";
+  parrafoTotal.textContent = "Donación final: " + CantidadTotalDonaciones().toLocaleString() + "€";
+  parrafoMedia.textContent = "Donación media: " + CantidadMediaDonaciones().toLocaleString() + "€/aportación";
 
   caja.appendChild(parrafoTotal);
   caja.appendChild(parrafoMedia);
