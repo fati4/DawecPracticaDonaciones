@@ -12,7 +12,7 @@
 ];*/
 
 //var arrayDonaciones = [10, 2, 3, 5, 2, 8, 5, 6, 3, 4];
-var arrayTotalDonacion = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 var arrayAportaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 var SaveTheChildren = new OPersonas(
@@ -131,20 +131,19 @@ function totalDonacionOrganizacion(organizacion) {
   total = Number(arrayOrganizaciones[indice].getTotal()) + Number(aportacion);
 
   arrayOrganizaciones[indice].setTotal(total);
-  console.log(arrayOrganizaciones[indice].getTotal());
-  console.log(arrayTotalDonacion);
-
   return total;
 }
-/*Esta función rellena el array de aportaciones segun las veces que se le de click a una organizacion.
-Al final de la función borra el contenido de texto si hubiera algo dentro de la caja de texto*/
+//Esta función rellena el array de aportaciones segun las veces que se le de click a una organizacion.
+
 function NumAportacionesPorOrganizacion(organizacion) {
   let indice = Number(
     arrayOrganizaciones.findIndex(
       (posicion) => posicion.getNombre() == organizacion
     )
   );
+
   let aportacion = document.getElementsByName("donacion")[indice].value;
+
   if (aportacion > 0) {
     let indice = Number(
       arrayOrganizaciones.findIndex(
@@ -156,11 +155,7 @@ function NumAportacionesPorOrganizacion(organizacion) {
     rellenarContenedorLateral(organizacion, aportacion);
     marcarOrganizacion(organizacion);
     calcularMedia(organizacion);
-
-    console.log(arrayAportaciones);
   }
-
-  // BorrarContenidoDiv();
 }
 
 function rellenarContenedorLateral(organizacion, aportacion) {
@@ -203,9 +198,10 @@ function calcularMedia(organizacion) {
 
   return media;
 }
-
+/* Crea otro array copia del array de objetos para ordenar las organizaciones */
 function InvertirOrderOrganizaciones() {
-  let arrayOrganizacionesOrdenadas = arrayOrganizaciones.sort(function (a, b) {
+  let arrayOrganizacionesOrdenadas = arrayOrganizaciones.slice();
+  arrayOrganizacionesOrdenadas.sort(function (a, b) {
     if (a.nombre > b.nombre) {
       return 1;
     }
@@ -216,65 +212,20 @@ function InvertirOrderOrganizaciones() {
     }
   });
   arrayOrganizacionesOrdenadas.reverse();
+
   return arrayOrganizacionesOrdenadas;
 }
 
-/*Crea un array que une las organizaciones con las aportaciones realizadas por cada organización 
-y luego los ordena al contrario del orden alfabetico. Si el numero de aportación es 0 no lo mete en el nuevo array*/
-/*
-function UnirOrganizacionYAportacion() {
-  let arrayOrganizacionConAportacion = [];
-  arrayOrganizacionConAportacion.length = 10;
-  for (var i = 0; i <= arrayOrganizacionConAportacion.length - 1; i++) {
-    if (arrayAportaciones[i] != 0) {
-      if(arrayAportaciones[i]>1){
-            arrayOrganizacionConAportacion[i] =
-        arrayOrganizacioness[i] + " ---- " + arrayAportaciones[i] + " aportaciones"; 
-      }else{
-        arrayOrganizacionConAportacion[i] =
-        arrayOrganizacioness[i] + " ---- " + arrayAportaciones[i] + " aportacion"; 
-      }
- 
-    }
-  }
-  arrayOrganizacionConAportacion.sort().reverse();
-  return arrayOrganizacionConAportacion;
-}
-*/
+/*Inicializa el array de aportaciones a 0 para poder volver a empezar de nuevo las donaciones y inicializa a cero la media y el total de los objetos */
 
-/*Hace la suma total de aportaciones que se han hecho sumando las posiciones del array de 
-aportaciones para tener el numero total de aportaciones y asi poder hacer la media*/
-/*
-function MediaTotalDonaciones() {
-  let numeroAportaciones = 0;
-  for (var i = 0; i <= arrayAportaciones.length - 1; i++) {
-    if (arrayAportaciones[i] != 0) {
-      numeroAportaciones = arrayAportaciones[i] + numeroAportaciones;
-    }
+function InicializarTodo() {
+  for (var i = 0; i < arrayOrganizaciones.length; i++) {
+    arrayAportaciones[i] = 0;
+    arrayOrganizaciones[i].setMedia(0);
+    arrayOrganizaciones[i].setTotal(0);
   }
-  let mediaDonaciones = SumaTotalDeDonaciones() / numeroAportaciones;
-  return mediaDonaciones;
 }
 
- 
-function SumaTotalDeDonaciones() {
-  let totalDonaciones = 0;
-  for (var i = 0; i <= arrayAportaciones.length - 1; i++) {
-    totalDonaciones =
-      arrayAportaciones[i] * arrayDonaciones[i] + totalDonaciones;
-  }
-  return totalDonaciones;
-}
-*/
-
-/*Inicializa el array de aportaciones a 0 para poder volver a empezar de nuevo las donaciones */
-/*
-function InicializarTodo(){
-  for(var i=0; i<=arrayAportaciones.length-1;i++){
-    arrayAportaciones[i]=0;
-  }
-}
-*/
 function CantidadTotalDonaciones() {
   let total = 0;
   for (var i = 0; i < arrayOrganizaciones.length; i++) {
@@ -291,13 +242,9 @@ function CantidadMediaDonaciones() {
   for (var i = 0; i < arrayOrganizaciones.length; i++) {
     if (arrayOrganizaciones[i].getTotal() != 0) {
       numeroOrganizaciones = numeroOrganizaciones + 1;
-      console.log(numeroOrganizaciones);
     }
   }
   let media = total / numeroOrganizaciones;
-  console.log(numeroOrganizaciones);
-  console.log(media);
-
   return Number(media);
 }
 function CrearTexto() {
@@ -307,7 +254,6 @@ function CrearTexto() {
   caja.appendChild(fecha);
 
   for (var i = 0; i < arrayOrganizaciones.length; i++) {
-
     let total = InvertirOrderOrganizaciones()[i].getTotal();
     console.log(total);
     if (total != 0) {
@@ -317,16 +263,20 @@ function CrearTexto() {
         " --- " +
         InvertirOrderOrganizaciones()[i].getMedia().toLocaleString() +
         "€ --- " +
-        InvertirOrderOrganizaciones()[i].getTotal().toLocaleString() + "€";
+        InvertirOrderOrganizaciones()[i].getTotal().toLocaleString() +
+        "€";
       caja.appendChild(parrafo);
     }
-
   }
   let parrafoTotal = document.createElement("p");
   let parrafoMedia = document.createElement("p");
 
-  parrafoTotal.textContent = "Donación final: " + CantidadTotalDonaciones().toLocaleString() + "€";
-  parrafoMedia.textContent = "Donación media: " + CantidadMediaDonaciones().toLocaleString() + "€/aportación";
+  parrafoTotal.textContent =
+    "Donación final: " + CantidadTotalDonaciones().toLocaleString() + "€";
+  parrafoMedia.textContent =
+    "Donación media: " +
+    CantidadMediaDonaciones().toLocaleString() +
+    "€/aportación";
 
   caja.appendChild(parrafoTotal);
   caja.appendChild(parrafoMedia);
@@ -334,50 +284,59 @@ function CrearTexto() {
   BorrarContenido();
 }
 
+//Crea una ventana emergente que desaparecera, si no es cerrada antes, a los 10segundos
+
 function ventanaEmergente() {
-  window.name="Ventana";
-  let ventana = window.open("", "nueva", "width=500,height=300")
-  let contenido="";
+  window.name = "Ventana";
+  let ventana = window.open("", "nueva", "width=500,height=300");
+  let contenido = "";
   for (var i = 0; i < arrayOrganizaciones.length; i++) {
     if (arrayOrganizaciones[i].getTotal() != 0) {
       if (arrayOrganizaciones[i].getTipo() == "Animales") {
-        contenido = (contenido + "<p>" + arrayOrganizaciones[i].getNombre() +" "+ arrayOrganizaciones[i].getMultiRaza() + " " + arrayOrganizaciones[i].getambitoTrabajo() + "</p>");
-      } if ((arrayOrganizaciones[i].getTipo() == "Personas")) {
-        contenido = (contenido + "<p>" + arrayOrganizaciones[i].getNombre() +" "+ arrayOrganizaciones[i].getColaborar() + " y " + arrayOrganizaciones[i].getrangoEdad() + "</p>");
-
+        contenido =
+          contenido +
+          "<p>" +
+          arrayOrganizaciones[i].getNombre() +
+          " " +
+          arrayOrganizaciones[i].getMultiRaza() +
+          " " +
+          arrayOrganizaciones[i].getambitoTrabajo() +
+          "</p>";
+      }
+      if (arrayOrganizaciones[i].getTipo() == "Personas") {
+        contenido =
+          contenido +
+          "<p>" +
+          arrayOrganizaciones[i].getNombre() +
+          " " +
+          arrayOrganizaciones[i].getColaborar() +
+          " y " +
+          arrayOrganizaciones[i].getrangoEdad() +
+          "</p>";
       }
     }
-    console.log(contenido);
-  } ventana.document.write(contenido)
+  }
+  ventana.document.write(contenido);
 
-  setTimeout(()=>{
-    
-      ventana.close();
-    
-  },3000)
+  setTimeout(() => {
+    ventana.close();
+  }, 10000);
 }
 
-
-function BorrarContenido(){
-  setTimeout(()=>{
-    let cajaLateral=document.getElementById("contenedorLateral"); 
+//Borra el contenido de la caja lateral, de la caja de abajo y del input de las organizaciones a los 10 segundos de pulsar el boton
+function BorrarContenido() {
+  setTimeout(() => {
+    let cajaLateral = document.getElementById("contenedorLateral");
     let caja = document.getElementById("CajaDeTexto");
-   while (caja.firstChild) {
+    for (var i = 0; i < arrayOrganizaciones.length; i++) {
+      document.getElementsByName("donacion")[i].value = "";
+    }
+    while (caja.firstChild) {
       caja.removeChild(caja.firstChild);
     }
-    while(cajaLateral.firstChild){
+    while (cajaLateral.firstChild) {
       cajaLateral.removeChild(cajaLateral.firstChild);
     }
-   
-  },10000)
+    InicializarTodo();
+  }, 10000);
 }
-
-/*
-function BorrarContenidoDiv() {
-  let caja = document.getElementById("CajaDeTexto");
-  while (caja.hasChildNodes) {
-    caja.removeChild(caja.lastChild);
-  }
-}
-
-*/
