@@ -321,9 +321,6 @@ function CrearTexto() {
       caja.appendChild(parrafo);
     }
 
-
-
-
   }
   let parrafoTotal = document.createElement("p");
   let parrafoMedia = document.createElement("p");
@@ -334,25 +331,46 @@ function CrearTexto() {
   caja.appendChild(parrafoTotal);
   caja.appendChild(parrafoMedia);
   ventanaEmergente();
-  InicializarTodo();
+  BorrarContenido();
 }
 
 function ventanaEmergente() {
-  let ventana = window.open("", "ventana", "width=500,height=300")
-  let contenido;
+  window.name="Ventana";
+  let ventana = window.open("", "nueva", "width=500,height=300")
+  let contenido="";
   for (var i = 0; i < arrayOrganizaciones.length; i++) {
     if (arrayOrganizaciones[i].getTotal() != 0) {
       if (arrayOrganizaciones[i].getTipo() == "Animales") {
         contenido = (contenido + "<p>" + arrayOrganizaciones[i].getNombre() +" "+ arrayOrganizaciones[i].getMultiRaza() + " " + arrayOrganizaciones[i].getambitoTrabajo() + "</p>");
       } if ((arrayOrganizaciones[i].getTipo() == "Personas")) {
-        contenido = (contenido + "<p>" + arrayOrganizaciones[i].getNombre() +" "+ arrayOrganizaciones[i].getColaborar() + " " + arrayOrganizaciones[i].getrangoEdad() + "</p>");
+        contenido = (contenido + "<p>" + arrayOrganizaciones[i].getNombre() +" "+ arrayOrganizaciones[i].getColaborar() + " y " + arrayOrganizaciones[i].getrangoEdad() + "</p>");
 
       }
     }
     console.log(contenido);
   } ventana.document.write(contenido)
+
+  setTimeout(()=>{
+    
+      ventana.close();
+    
+  },3000)
 }
 
+
+function BorrarContenido(){
+  setTimeout(()=>{
+    let cajaLateral=document.getElementById("contenedorLateral"); 
+    let caja = document.getElementById("CajaDeTexto");
+   while (caja.firstChild) {
+      caja.removeChild(caja.firstChild);
+    }
+    while(cajaLateral.firstChild){
+      cajaLateral.removeChild(cajaLateral.firstChild);
+    }
+   
+  },10000)
+}
 
 /*
 function BorrarContenidoDiv() {
