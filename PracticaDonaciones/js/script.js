@@ -1,17 +1,4 @@
-/*var arrayOrganizacioness = [
-  "Save the children",
-  "Caritas",
-  "Cruz Roja",
-  "GreenPeace",
-  "Medicos sin fronteras",
-  "Accion contra el hambre",
-  "Amnistía Internacional",
-  "Asociación Española contra el cáncer",
-  "WWF",
-  "Unicef"
-];*/
 
-//var arrayDonaciones = [10, 2, 3, 5, 2, 8, 5, 6, 3, 4];
 
 var arrayAportaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -119,6 +106,7 @@ var arrayOrganizaciones = [
   Unicef,
 ];
 
+//Esta funcion recoje el número que metemos y lo suma al total de la organizacion pulsada.
 function totalDonacionOrganizacion(organizacion) {
   let indice = Number(
     arrayOrganizaciones.findIndex(
@@ -165,6 +153,8 @@ function rellenarContenedorLateral(organizacion, aportacion) {
   parrafoDonacion.textContent = organizacion + " --- " + aportacion;
   cajaLateral.appendChild(parrafoDonacion);
 }
+
+
 function marcarOrganizacion(organizacion) {
   var cajaLateral = document.getElementById("contenedorLateral");
   let parrafosL = cajaLateral.children;
@@ -172,9 +162,10 @@ function marcarOrganizacion(organizacion) {
     let pI = parrafosL[i].textContent;
     let contiene = pI.search(organizacion);
     if (contiene != -1) {
-      parrafosL[i].style.color = "green";
+      parrafosL[i].classList.add("marcado");
+     
     } else {
-      parrafosL[i].style.color = "black";
+      parrafosL[i].classList.remove("marcado");
     }
   }
 }
@@ -183,7 +174,7 @@ function fechaFinalizacion() {
   let fechaActual = new Date().toLocaleString();
   return fechaActual;
 }
-
+//calcula la media de cada organización teniendo en cuenta las veces que se le han hecho una aportación.
 function calcularMedia(organizacion) {
   let indice = Number(
     arrayOrganizaciones.findIndex(
@@ -225,7 +216,7 @@ function InicializarTodo() {
     arrayOrganizaciones[i].setTotal(0);
   }
 }
-
+//calcula el total donado de todas las organizaciones
 function CantidadTotalDonaciones() {
   let total = 0;
   for (var i = 0; i < arrayOrganizaciones.length; i++) {
@@ -236,6 +227,7 @@ function CantidadTotalDonaciones() {
 
   return total;
 }
+//calcula la media donada de todas las organizaciones
 function CantidadMediaDonaciones() {
   let total = CantidadTotalDonaciones();
   let numeroOrganizaciones = 0;
