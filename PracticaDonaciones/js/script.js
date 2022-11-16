@@ -1,5 +1,3 @@
-
-
 var arrayAportaciones = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 var SaveTheChildren = new OPersonas(
@@ -114,11 +112,13 @@ function totalDonacionOrganizacion(organizacion) {
     )
   );
   let aportacion = document.getElementsByName("donacion")[indice].value;
-  console.log(aportacion);
+
   let total;
   total = Number(arrayOrganizaciones[indice].getTotal()) + Number(aportacion);
-
+  //let redondeo= Math.floor(total*100)/100;
+  // console.log(redondeo)
   arrayOrganizaciones[indice].setTotal(total);
+
   return total;
 }
 //Esta función rellena el array de aportaciones segun las veces que se le de click a una organizacion.
@@ -154,7 +154,6 @@ function rellenarContenedorLateral(organizacion, aportacion) {
   cajaLateral.appendChild(parrafoDonacion);
 }
 
-
 function marcarOrganizacion(organizacion) {
   var cajaLateral = document.getElementById("contenedorLateral");
   let parrafosL = cajaLateral.children;
@@ -163,7 +162,6 @@ function marcarOrganizacion(organizacion) {
     let contiene = pI.search(organizacion);
     if (contiene != -1) {
       parrafosL[i].classList.add("marcado");
-     
     } else {
       parrafosL[i].classList.remove("marcado");
     }
@@ -185,7 +183,6 @@ function calcularMedia(organizacion) {
     arrayOrganizaciones[indice].getTotal() / arrayAportaciones[indice];
 
   arrayOrganizaciones[indice].setMedia(media);
-  console.log(arrayOrganizaciones[indice].getMedia());
 
   return media;
 }
@@ -223,7 +220,7 @@ function CantidadTotalDonaciones() {
     let totalO = Number(arrayOrganizaciones[i].getTotal());
     total = totalO + total;
   }
-  console.log(total);
+
 
   return total;
 }
@@ -247,15 +244,20 @@ function CrearTexto() {
 
   for (var i = 0; i < arrayOrganizaciones.length; i++) {
     let total = InvertirOrderOrganizaciones()[i].getTotal();
-    console.log(total);
+   
     if (total != 0) {
+      let total = InvertirOrderOrganizaciones()[i].getTotal();
+      let redondeoT = Math.floor(total * 100) / 100;
+      let media = InvertirOrderOrganizaciones()[i].getMedia();
+      let redondeoM = Math.floor(media * 100) / 100;
+
       let parrafo = document.createElement("p");
       parrafo.textContent =
         InvertirOrderOrganizaciones()[i].getNombre() +
         " --- " +
-        InvertirOrderOrganizaciones()[i].getMedia().toLocaleString() +
+        redondeoM.toLocaleString() +
         "€ --- " +
-        InvertirOrderOrganizaciones()[i].getTotal().toLocaleString() +
+        redondeoT.toLocaleString() +
         "€";
       caja.appendChild(parrafo);
     }
